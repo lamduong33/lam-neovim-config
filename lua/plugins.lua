@@ -4,11 +4,8 @@ local use = require('packer').use
 
 return require('packer').startup(function()
     use 'wbthomason/packer.nvim' -- Package manager
-    use "williamboman/lsp-installer",
+    use "williamboman/nvim-lsp-installer"
     use 'neovim/nvim-lspconfig' -- Collection of configurations for the built-in LSP client
-
-    -- Themeing
-    use 'folke/tokyonight.nvim'
 
     -- autocompletion
     use 'hrsh7th/cmp-nvim-lsp'
@@ -16,13 +13,9 @@ return require('packer').startup(function()
     use 'hrsh7th/cmp-path'
     use 'hrsh7th/cmp-cmdline'
     use 'hrsh7th/nvim-cmp'
-
     use 'hrsh7th/cmp-vsnip'
     use 'hrsh7th/vim-vsnip'
-
-    use 'arcticicestudio/nord-vim'
     use 'andweeb/presence.nvim'
-
     use 'liuchengxu/vim-clap'
     use({
         'CosmicNvim/cosmic-ui',
@@ -34,7 +27,23 @@ return require('packer').startup(function()
 
     -- Visual
     use 'glepnir/dashboard-nvim'
+    use 'folke/tokyonight.nvim'
+    use {
+        'nvim-treesitter/nvim-treesitter',
+        run = ':TSUpdate'
+    }
 
     -- Latex
     use 'lervag/vimtex'
+
+    -- Others
+    use 'tpope/vim-fugitive' -- git intergation
+    -- Treesitter
+    use {
+    'kyazdani42/nvim-tree.lua',
+    requires = {
+      'kyazdani42/nvim-web-devicons', -- optional, for file icon
+    },
+    tag = 'nightly' -- optional, updated every week. (see issue #1193)
+}
 end)
