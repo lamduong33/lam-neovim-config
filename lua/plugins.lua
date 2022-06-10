@@ -4,7 +4,11 @@ local use = require('packer').use
 
 return require('packer').startup(function()
     use 'wbthomason/packer.nvim' -- Package manager
+    use "williamboman/lsp-installer",
     use 'neovim/nvim-lspconfig' -- Collection of configurations for the built-in LSP client
+
+    -- Themeing
+    use 'folke/tokyonight.nvim'
 
     -- autocompletion
     use 'hrsh7th/cmp-nvim-lsp'
@@ -27,5 +31,10 @@ return require('packer').startup(function()
         require('cosmic-ui').setup()
     end,
     })
+
+    -- Visual
     use 'glepnir/dashboard-nvim'
+
+    -- Latex
+    use 'lervag/vimtex'
 end)

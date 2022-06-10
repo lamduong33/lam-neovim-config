@@ -3,10 +3,16 @@ vim.g.mapleader = ' '
 
 -- Vim settings from vimrc
 vim.cmd([[
+packadd packer.nvim
 set runtimepath^=~/.vim runtimepath+=~/.vim/after
 let &packpath=&runtimepath
 source ~/.vimrc
-colorscheme nord
+syntax enable
+
+let g:tokyonight_style="night"
+let g:tokyonight_italic_comments="true"
+let g:tokyonight_transparent="true"
+colorscheme tokyonight
 ]])
 
 -- Start using plugins file in the lua folder
@@ -57,7 +63,7 @@ for _, lsp in pairs(servers) do
 end
 
 
--- --------------------------- AUTO-COMPLETION --------------------------------
+----------------------------- AUTO-COMPLETION --------------------------------
 -- Setup nvim-cmp.
 local cmp = require'cmp'
 
@@ -90,7 +96,10 @@ cmp.setup({
     -- { name = 'snippy' }, -- For snippy users.
   }, {
     { name = 'buffer' },
-  })
+  }),
+  experimental = {
+      ghost_text = true
+  }
 })
 
 -- Set configuration for specific filetype.
@@ -118,13 +127,19 @@ cmp.setup.cmdline(':', {
   })
 })
 
--- Setup lspconfig.
+----------------------------------LSP--------------------------------------
 local capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
+require("nvim-lsp-installer").setup{}
+
 require'lspconfig'.pyright.setup{
   capabilities = capabilities
 }
 require'lspconfig'.texlab.setup{
   capabilities = capabilities
 }
-
+require'lspconfig'.clangd.setup{
+  capabilities = capabilities
+}
+require'lspconfig'.eslint.setup{}
+require'lspconfig'.tsserver.setup{}
 
