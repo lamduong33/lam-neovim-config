@@ -12,6 +12,7 @@ syntax enable
 let g:tokyonight_style="night"
 let g:tokyonight_italic_comments="true"
 let g:tokyonight_transparent="true"
+let g:tokyonight_transparent_sidebar="true"
 colorscheme tokyonight
 " nvim-tree setting
 " vimrc
