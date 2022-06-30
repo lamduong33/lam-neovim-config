@@ -31,24 +31,30 @@ return require('packer').startup(function()
     -- Visual
     use 'glepnir/dashboard-nvim'
     use 'folke/tokyonight.nvim'
+    use 'shaunsingh/nord.nvim'
     use {
         'nvim-treesitter/nvim-treesitter',
         run = ':TSUpdate'
     }
 
-    -- Latex
-    use 'lervag/vimtex'
-
-    -- Others
-    use 'tpope/vim-fugitive' -- git intergation
-    use { 'TimUntersberger/neogit', requires = 'nvim-lua/plenary.nvim' }
+    -- Lua line
+    use {
+        'nvim-lualine/lualine.nvim',
+        requires = { 'kyazdani42/nvim-web-devicons', opt = true }
+    }
 
     -- Treesitter
     use {
     'kyazdani42/nvim-tree.lua',
-    requires = {
-      'kyazdani42/nvim-web-devicons', -- optional, for file icon
-    },
-    tag = 'nightly' -- optional, updated every week. (see issue #1193)
-}
+        requires = {
+          'kyazdani42/nvim-web-devicons', -- optional, for file icon
+        },
+        tag = 'nightly' -- optional, updated every week. (see issue #1193)
+    }
+
+    -- Others
+    use 'tpope/vim-fugitive' -- git intergation
+    use { 'TimUntersberger/neogit', requires = 'nvim-lua/plenary.nvim' }
+    use 'lervag/vimtex' -- latex
+
 end)
