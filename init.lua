@@ -5,29 +5,13 @@ set runtimepath^=~/.vim runtimepath+=~/.vim/after
 let &packpath=&runtimepath
 source ~/.vimrc
 syntax enable
-
-let g:tokyonight_style="night"
-let g:tokyonight_italic_comments="true"
-let g:tokyonight_transparent="true"
-let g:tokyonight_transparent_sidebar="true"
-colorscheme tokyonight
-" nvim-tree setting
 " vimrc
 nnoremap <C-n> :NvimTreeToggle<CR>
 nnoremap <leader>r :NvimTreeRefresh<CR>
 nnoremap <leader>n :NvimTreeFindFile<CR>
-" More available functions:
-" NvimTreeOpen
-" NvimTreeClose
-" NvimTreeFocus
-" NvimTreeFindFileToggle
-" NvimTreeResize
-" NvimTreeCollapse
-" NvimTreeCollapseKeepBuffers
 set termguicolors " this variable must be enabled for colors to be applied properly
-" a list of groups can be found at `:help nvim_tree_highlight`
-"" highlight NvimTreeFolderIcon guibg=blue
 ]])
+
 
 -------------------------NVIM LUA CONFIG -----------------------------------
 
@@ -237,6 +221,15 @@ require'nvim-tree'.setup {
 
 -- Nord theme setup
 vim.g.nord_contrast = true
-vim.g.nord_borders = true
+vim.g.nord_borders = false
 vim.g.nord_disable_background = true
 vim.g.nord_italic = true
+
+-- Tokyonight theme
+vim.g.tokyonight_style = "night"
+vim.g.tokyonight_italic_comments = true
+vim.g.tokyonight_transparent = true
+vim.g.tokyonight_transparent_sidebar = true
+vim.g.tokyonight_sidebars = { "qf", "vista_kind", "terminal", "packer" }
+
+vim.cmd([[colorscheme tokyonight]])
