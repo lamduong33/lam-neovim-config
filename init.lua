@@ -1,7 +1,4 @@
--- Leader key
-vim.g.mapleader = ' '
-
--- Vim settings from vimrc
+--------------------------------Vim settings from vimrc -----------------------
 vim.cmd([[
 packadd packer.nvim
 set runtimepath^=~/.vim runtimepath+=~/.vim/after
@@ -29,8 +26,12 @@ nnoremap <leader>n :NvimTreeFindFile<CR>
 " NvimTreeCollapseKeepBuffers
 set termguicolors " this variable must be enabled for colors to be applied properly
 " a list of groups can be found at `:help nvim_tree_highlight`
-highlight NvimTreeFolderIcon guibg=blue
+"" highlight NvimTreeFolderIcon guibg=blue
 ]])
+
+-------------------------NVIM LUA CONFIG -----------------------------------
+-- Leader key
+vim.g.mapleader = ' '
 
 -- Start using plugins file in the lua folder
 require('plugins')
@@ -147,7 +148,6 @@ cmp.setup.cmdline(':', {
 ----------------------------------LSP--------------------------------------
 local capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
 require("nvim-lsp-installer").setup{}
-
 require'lspconfig'.pyright.setup{
   capabilities = capabilities
 }
@@ -158,7 +158,10 @@ require'lspconfig'.clangd.setup{
   capabilities = capabilities
 }
 require'lspconfig'.eslint.setup{}
-require'lspconfig'.tsserver.setup{}
+require'lspconfig'.tsserver.setup{
+    cmd = { "typescript-language-server", "--stdio"},
+    filetypes = { "javascript", "javascriptreact", "javascript.jsx", "typescript", "typescriptreact", "typescript.tsx" },
+}
 
 -- TreeSitter config taken from their github page
 require'nvim-treesitter.configs'.setup {
@@ -193,3 +196,6 @@ require'nvim-treesitter.configs'.setup {
 -- Nvim-Tree setup using defaults: add your own options
 require'nvim-tree'.setup {
 }
+----------------------------- Git --------------------------------
+local neogit = require('neogit')
+neogit.setup {}
