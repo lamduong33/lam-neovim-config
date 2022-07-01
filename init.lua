@@ -220,6 +220,58 @@ require('lualine').setup {
   extensions = {}
 }
 ----------------------------- OTHERS --------------------------------
+
+-- Dashboard 
+local home = os.getenv('HOME')
+local db = require('dashboard')
+db.custom_center = {
+  {icon = ' ',
+  desc = 'Reload Last Session                     ',
+  shortcut = 'SPC s l',
+  action ='SessionLoad'},
+  {icon = ' ',
+  desc = 'Recently opened files                   ',
+  action =  'DashboardFindHistory',
+  shortcut = 'SPC f r'},
+  {icon = ' ',
+  desc = 'Find  File                              ',
+  action = 'Telescope find_files find_command=rg,--hidden,--files',
+  shortcut = 'SPC f f'},
+  {icon = ' ',
+  desc = 'File Browser                            ',
+  action =  'Telescope file_browser',
+  shortcut = 'SPC f b'},
+  {icon = ' ',
+  desc = 'Find word                               ',
+  action = 'Telescope live_grep',
+  shortcut = 'SPC f w'},
+  {icon = ' ',
+  desc = 'Open NVim dotfiles                      ',
+  action = 'Telescope dotfiles path=' .. home ..'/.config/nvim',
+  shortcut = 'SPC f p'},
+}
+db.custom_header = {
+"                        .               ",     
+"    ##############..... ##############  ", 
+"    ##############......##############  ", 
+"      ##########..........##########    ", 
+"      ##########........##########      ", 
+"      ##########.......##########       ", 
+"      ##########.....##########..       ", 
+"      ##########....##########.....     ", 
+"    ..##########..##########.........   ", 
+"  ....##########.#########............. ", 
+"    ..################JJJ............   ", 
+"      ################.............     ", 
+"      ##############.JJJ.JJJJJJJJJJ     ", 
+"      ############...JJ...JJ..JJ  JJ    ", 
+"      ##########....JJ...JJ..JJ  JJ     ", 
+"      ########......JJJ..JJJ JJJ JJJ    ", 
+"      ######    .........               ",
+"                  .....                 ", 
+"                    .                   ",
+       }
+
 -- Neogit: similar to Magit
 local neogit = require('neogit')
 neogit.setup {}
