@@ -18,7 +18,6 @@ return require('packer').startup(function()
     use 'L3MON4D3/LuaSnip'
     use 'saadparwaiz1/cmp_luasnip'
 
-    use 'andweeb/presence.nvim'
     use 'liuchengxu/vim-clap'
     use({
         'CosmicNvim/cosmic-ui',
@@ -29,7 +28,14 @@ return require('packer').startup(function()
     })
 
     -- Visual
-    use 'glepnir/dashboard-nvim'
+    use {'glepnir/dashboard-nvim'}
+    use {
+      "lukas-reineke/indent-blankline.nvim", -- show the indentation level
+      config = function()
+        require("indent_blankline").setup { filetype_exclude = { "dashboard" }
+        }
+      end
+    }
     use 'folke/tokyonight.nvim'
     use 'shaunsingh/nord.nvim'
     use {
@@ -56,5 +62,14 @@ return require('packer').startup(function()
     use 'tpope/vim-fugitive' -- git intergation
     use { 'TimUntersberger/neogit', requires = 'nvim-lua/plenary.nvim' }
     use 'lervag/vimtex' -- latex
-
+    use {
+        "folke/which-key.nvim",
+        config = function()
+        require("which-key").setup {
+          -- your configuration comes here
+          -- or leave it empty to use the default settings
+          -- refer to the configuration section below
+        }
+    end
+    }
 end)
