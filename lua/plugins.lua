@@ -49,7 +49,7 @@ return require('packer').startup(function()
         requires = { 'kyazdani42/nvim-web-devicons', opt = true }
     }
 
-    -- Treesitter
+    -- Treesitter - better syntax highlighting
     use {
     'kyazdani42/nvim-tree.lua',
         requires = {

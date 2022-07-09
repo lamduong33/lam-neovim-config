@@ -21,6 +21,10 @@ vim.g.mapleader = ' '
 -- Start using plugins file in the lua folder
 require('plugins')
 
+-- For popups and how long it takes to show them
+vim.opt.timeoutlen = 300
+vim.opt.updatetime = 100
+
 ----------------------- SUGGESTED LSP CONFIG -------------------------------------
 -- Mappings.
 -- See `:help vim.diagnostic.*` for documentation on any of the below functions
