@@ -274,7 +274,7 @@ db.custom_header = {
 "      ######    .........               ",
 "                  .....                 ", 
 "                    .                   ",
-       }
+}
 
 -- Neogit: similar to Magit
 local neogit = require('neogit')

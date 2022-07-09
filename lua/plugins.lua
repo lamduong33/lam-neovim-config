@@ -28,14 +28,8 @@ return require('packer').startup(function()
     })
 
     -- Visual
-    use {'glepnir/dashboard-nvim'}
-    use {
-      "lukas-reineke/indent-blankline.nvim", -- show the indentation level
-      config = function()
-        require("indent_blankline").setup { filetype_exclude = { "dashboard" }
-        }
-      end
-    }
+    -- use {'glepnir/dashboard-nvim'}
+    use { "lukas-reineke/indent-blankline.nvim"| -- show the indentation level 
     use 'folke/tokyonight.nvim'
     use 'shaunsingh/nord.nvim'
     use {
@@ -71,5 +65,10 @@ return require('packer').startup(function()
           -- refer to the configuration section below
         }
     end
+    }
+    -- Telescope - fuzzy finding
+    use {
+        'nvim-telescope/telescope.nvim',
+        requires = { {'nvim-lua/plenary.nvim'} }
     }
 end)
