@@ -37,7 +37,6 @@ return require('packer').startup(function()
       end
     }
 
-    use { "lukas-reineke/indent-blankline.nvim"} -- show the indentation level 
     use 'folke/tokyonight.nvim'
     use 'shaunsingh/nord.nvim'
     use {
@@ -79,4 +78,5 @@ return require('packer').startup(function()
         'nvim-telescope/telescope.nvim',
         requires = { {'nvim-lua/plenary.nvim'} }
     }
+    use { "nvim-telescope/telescope-file-browser.nvim" }
 end)
