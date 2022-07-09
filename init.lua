@@ -90,11 +90,12 @@ require'lspconfig'.texlab.setup{
 require'lspconfig'.clangd.setup{
   capabilities = capabilities
 }
--- require'lspconfig'.eslint.setup{}
-require'lspconfig'.tsserver.setup{
-    cmd = { "typescript-language-server", "--stdio"},
-    filetypes = { "javascript", "javascriptreact", "javascript.jsx", "typescript", "typescriptreact", "typescript.tsx" },
-}
+require'lspconfig'.eslint.setup{}
+--require'lspconfig'.tsserver.setup{
+--    cmd = { "typescript-language-server", "--stdio"},
+--    filetypes = { "javascript", "javascriptreact", "javascript.jsx", "typescript", "typescriptreact", "typescript.tsx" },
+--    on_attach = on_attach,
+--}
 
 -- TreeSitter config taken from their github page
 require'nvim-treesitter.configs'.setup {
@@ -244,7 +245,7 @@ db.custom_center = {
   action ='SessionLoad'},
   {icon = ' ',
   desc = 'Recently opened files                   ',
-  action =  'DashboardFindHistory',
+  action =  'Telescope oldfiles',
   shortcut = 'SPC f r'},
   {icon = ' ',
   desc = 'Find  File                              ',
@@ -264,7 +265,7 @@ db.custom_center = {
   shortcut = 'SPC f p'},
 }
 map('n', '<leader>sl', '<cmd>SessionLoad<CR>', opts)
-map('n', '<leader>fr', '<cmd>DashboardFindHistory<CR>', opts)
+map('n', '<leader>fr', '<cmd>Telescope oldfiles<CR>', opts)
 map('n', '<leader>ff', '<cmd>Telescope find_files find_command=rg,--hidden,--files<CR>', opts)
 map('n', '<leader>.', '<cmd>Telescope file_browser<CR>', opts)
 map('n', '<leader>fw', '<cmd>Telescope live_grep<CR>', opts)
@@ -292,6 +293,7 @@ local vim_header = {
 "                    .                   ",
 }
 db.custom_header=vim_header
+db.SessionLoad=true
 
 -- Telescope file browser
 require("telescope").load_extension "file_browser"
@@ -299,6 +301,7 @@ require("telescope").load_extension "file_browser"
 -- Neogit: similar to Magit
 local neogit = require('neogit')
 neogit.setup {}
+map('n', '<leader>gg', '<cmd>Neogit<CR>', opts)
 
 -- Nvim-Tree setup using defaults: add your own options
 require'nvim-tree'.setup {
