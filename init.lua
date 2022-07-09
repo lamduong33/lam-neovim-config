@@ -37,10 +37,10 @@ vim.opt.updatetime = 100
 -- Mappings.
 -- See `:help vim.diagnostic.*` for documentation on any of the below functions
 local opts = { noremap=true, silent=true }
-map('n', '<space>e', '<cmd>lua vim.diagnostic.open_float()<CR>', opts)
+map('n', '<leader>e', '<cmd>lua vim.diagnostic.open_float()<CR>', opts)
 map('n', '[d', '<cmd>lua vim.diagnostic.goto_prev()<CR>', opts)
 map('n', ']d', '<cmd>lua vim.diagnostic.goto_next()<CR>', opts)
-map('n', '<space>qd', '<cmd>lua vim.diagnostic.setloclist()<CR>', opts)
+map('n', '<leader>qd', '<cmd>lua vim.diagnostic.setloclist()<CR>', opts)
 map('n', '<leader>qq','<cmd>quitall<CR>',opts)
 
 -- Use an on_attach function to only map the following keys
@@ -253,7 +253,7 @@ db.custom_center = {
   {icon = ' ',
   desc = 'File Browser                            ',
   action =  'Telescope file_browser',
-  shortcut = 'SPC f b'},
+  shortcut = 'SPC .  '},
   {icon = ' ',
   desc = 'Find word                               ',
   action = 'Telescope live_grep',
@@ -263,6 +263,13 @@ db.custom_center = {
   action = 'Telescope dotfiles path=' .. home ..'/.config/nvim',
   shortcut = 'SPC f p'},
 }
+map('n', '<leader>sl', '<cmd>SessionLoad<CR>', opts)
+map('n', '<leader>fr', '<cmd>DashboardFindHistory<CR>', opts)
+map('n', '<leader>ff', '<cmd>Telescope find_files find_command=rg,--hidden,--files<CR>', opts)
+map('n', '<leader>.', '<cmd>Telescope file_browser<CR>', opts)
+map('n', '<leader>fw', '<cmd>Telescope live_grep<CR>', opts)
+map('n', '<leader>fw', '<cmd>Telescope dotfiles path=' .. home ..'/.config/nvim<CR>', opts)
+
 local vim_header = {
 "                        .               ",     
 "    ##############..... ##############  ", 
@@ -285,6 +292,9 @@ local vim_header = {
 "                    .                   ",
 }
 db.custom_header=vim_header
+
+-- Telescope file browser
+require("telescope").load_extension "file_browser"
 
 -- Neogit: similar to Magit
 local neogit = require('neogit')
