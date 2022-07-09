@@ -37,11 +37,11 @@ vim.opt.updatetime = 100
 -- Mappings.
 -- See `:help vim.diagnostic.*` for documentation on any of the below functions
 local opts = { noremap=true, silent=true }
-vim.api.nvim_set_keymap('n', '<space>e', '<cmd>lua vim.diagnostic.open_float()<CR>', opts)
-vim.api.nvim_set_keymap('n', '[d', '<cmd>lua vim.diagnostic.goto_prev()<CR>', opts)
-vim.api.nvim_set_keymap('n', ']d', '<cmd>lua vim.diagnostic.goto_next()<CR>', opts)
-vim.api.nvim_set_keymap('n', '<space>qd', '<cmd>lua vim.diagnostic.setloclist()<CR>', opts)
-vim.api.nvim_set_keymap('n', '<leader>qq','<cmd>quitall<CR>',opts)
+map('n', '<space>e', '<cmd>lua vim.diagnostic.open_float()<CR>', opts)
+map('n', '[d', '<cmd>lua vim.diagnostic.goto_prev()<CR>', opts)
+map('n', ']d', '<cmd>lua vim.diagnostic.goto_next()<CR>', opts)
+map('n', '<space>qd', '<cmd>lua vim.diagnostic.setloclist()<CR>', opts)
+map('n', '<leader>qq','<cmd>quitall<CR>',opts)
 
 -- Use an on_attach function to only map the following keys
 -- after the language server attaches to the current buffer
@@ -237,6 +237,32 @@ require('lualine').setup {
 -- Dashboard 
 local home = os.getenv('HOME')
 local db = require('dashboard')
+db.custom_center = {
+  {icon = ' ',
+  desc = 'Reload Last Session                     ',
+  shortcut = 'SPC s l',
+  action ='SessionLoad'},
+  {icon = ' ',
+  desc = 'Recently opened files                   ',
+  action =  'DashboardFindHistory',
+  shortcut = 'SPC f r'},
+  {icon = ' ',
+  desc = 'Find  File                              ',
+  action = 'Telescope find_files find_command=rg,--hidden,--files',
+  shortcut = 'SPC f f'},
+  {icon = ' ',
+  desc = 'File Browser                            ',
+  action =  'Telescope file_browser',
+  shortcut = 'SPC f b'},
+  {icon = ' ',
+  desc = 'Find word                               ',
+  action = 'Telescope live_grep',
+  shortcut = 'SPC f w'},
+  {icon = ' ',
+  desc = 'Open NVim dotfiles                      ',
+  action = 'Telescope dotfiles path=' .. home ..'/.config/nvim',
+  shortcut = 'SPC f p'},
+}
 local vim_header = {
 "                        .               ",     
 "    ##############..... ##############  ", 
