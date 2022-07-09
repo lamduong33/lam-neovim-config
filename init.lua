@@ -17,6 +17,14 @@ set termguicolors " this variable must be enabled for colors to be applied prope
 
 -- Leader key
 vim.g.mapleader = ' '
+-- Functional wrapper for mapping custom keybindings
+function map(mode, lhs, rhs, opts)
+    local options = { noremap = true }
+    if opts then
+        options = vim.tbl_extend("force", options, opts)
+    end
+    vim.api.nvim_set_keymap(mode, lhs, rhs, options)
+end
 
 -- Start using plugins file in the lua folder
 require('plugins')
@@ -32,7 +40,8 @@ local opts = { noremap=true, silent=true }
 vim.api.nvim_set_keymap('n', '<space>e', '<cmd>lua vim.diagnostic.open_float()<CR>', opts)
 vim.api.nvim_set_keymap('n', '[d', '<cmd>lua vim.diagnostic.goto_prev()<CR>', opts)
 vim.api.nvim_set_keymap('n', ']d', '<cmd>lua vim.diagnostic.goto_next()<CR>', opts)
-vim.api.nvim_set_keymap('n', '<space>q', '<cmd>lua vim.diagnostic.setloclist()<CR>', opts)
+vim.api.nvim_set_keymap('n', '<space>qd', '<cmd>lua vim.diagnostic.setloclist()<CR>', opts)
+vim.api.nvim_set_keymap('n', '<leader>qq','<cmd>quitall<CR>',opts)
 
 -- Use an on_attach function to only map the following keys
 -- after the language server attaches to the current buffer
@@ -227,6 +236,7 @@ require('lualine').setup {
 
 -- Dashboard 
 local home = os.getenv('HOME')
+local db = require('dashboard')
 local vim_header = {
 "                        .               ",     
 "    ##############..... ##############  ", 
@@ -248,6 +258,7 @@ local vim_header = {
 "                  .....                 ", 
 "                    .                   ",
 }
+db.custom_header=vim_header
 
 -- Neogit: similar to Magit
 local neogit = require('neogit')

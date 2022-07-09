@@ -28,8 +28,16 @@ return require('packer').startup(function()
     })
 
     -- Visual
-    -- use {'glepnir/dashboard-nvim'}
-    use { "lukas-reineke/indent-blankline.nvim"| -- show the indentation level 
+    use {'glepnir/dashboard-nvim'}
+    use {
+      "lukas-reineke/indent-blankline.nvim", -- show the indentation level
+      config = function()
+        require("indent_blankline").setup { filetype_exclude = { "dashboard" }
+        }
+      end
+    }
+
+    use { "lukas-reineke/indent-blankline.nvim"} -- show the indentation level 
     use 'folke/tokyonight.nvim'
     use 'shaunsingh/nord.nvim'
     use {
