@@ -42,26 +42,29 @@ map('n', '[d', '<cmd>lua vim.diagnostic.goto_prev()<CR>', opts)
 map('n', ']d', '<cmd>lua vim.diagnostic.goto_next()<CR>', opts)
 map('n', '<leader>qd', '<cmd>lua vim.diagnostic.setloclist()<CR>', opts)
 map('n', '<leader>qq','<cmd>quitall<CR>',opts)
+map('n', '<leader>op','<cmd>NvimTreeToggle<CR>',opts)
+map('n', '<leader>cf','<cmd>Neoformat<CR>',opts)
 
--- Use an on_attach function to only map the following keys
+--  se an on_attach function to only map the following keys
 -- after the language server attaches to the current buffer
 local on_attach = function(client, bufnr)
   -- Enable completion triggered by <c-x><c-o>
   vim.api.nvim_buf_set_option(bufnr, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
 
-  -- Mappings.
+  -- LSP Mappings.
   -- See `:help vim.lsp.*` for documentation on any of the below functions
   vim.api.nvim_buf_set_keymap(bufnr, 'n', 'gD', '<cmd>lua vim.lsp.buf.declaration()<CR>', opts)
   vim.api.nvim_buf_set_keymap(bufnr, 'n', 'gd', '<cmd>lua vim.lsp.buf.definition()<CR>', opts)
   vim.api.nvim_buf_set_keymap(bufnr, 'n', 'K', '<cmd>lua vim.lsp.buf.hover()<CR>', opts)
+  vim.api.nvim_buf_set_keymap(bufnr, 'n', 'gh', '<cmd>lua vim.lsp.buf.hover()<CR>', opts)
   vim.api.nvim_buf_set_keymap(bufnr, 'n', 'gi', '<cmd>lua vim.lsp.buf.implementation()<CR>', opts)
   vim.api.nvim_buf_set_keymap(bufnr, 'n', '<C-k>', '<cmd>lua vim.lsp.buf.signature_help()<CR>', opts)
-  vim.api.nvim_buf_set_keymap(bufnr, 'n', '<space>wa', '<cmd>lua vim.lsp.buf.add_workspace_folder()<CR>', opts)
-  vim.api.nvim_buf_set_keymap(bufnr, 'n', '<space>wr', '<cmd>lua vim.lsp.buf.remove_workspace_folder()<CR>', opts)
-  vim.api.nvim_buf_set_keymap(bufnr, 'n', '<space>wl', '<cmd>lua print(vim.inspect(vim.lsp.buf.list_workspace_folders()))<CR>', opts)
-  vim.api.nvim_buf_set_keymap(bufnr, 'n', '<space>D', '<cmd>lua vim.lsp.buf.type_definition()<CR>', opts)
-  vim.api.nvim_buf_set_keymap(bufnr, 'n', '<space>rn', '<cmd>lua vim.lsp.buf.rename()<CR>', opts)
-  vim.api.nvim_buf_set_keymap(bufnr, 'n', '<space>ca', '<cmd>lua vim.lsp.buf.code_action()<CR>', opts)
+  vim.api.nvim_buf_set_keymap(bufnr, 'n', '<leader>wa', '<cmd>lua vim.lsp.buf.add_workspace_folder()<CR>', opts)
+  vim.api.nvim_buf_set_keymap(bufnr, 'n', '<leader>wr', '<cmd>lua vim.lsp.buf.remove_workspace_folder()<CR>', opts)
+  vim.api.nvim_buf_set_keymap(bufnr, 'n', '<leader>wl', '<cmd>lua print(vim.inspect(vim.lsp.buf.list_workspace_folders()))<CR>', opts)
+  vim.api.nvim_buf_set_keymap(bufnr, 'n', '<leader>D', '<cmd>lua vim.lsp.buf.type_definition()<CR>', opts)
+  vim.api.nvim_buf_set_keymap(bufnr, 'n', '<leader>rn', '<cmd>lua vim.lsp.buf.rename()<CR>', opts)
+  vim.api.nvim_buf_set_keymap(bufnr, 'n', '<leader>ca', '<cmd>lua vim.lsp.buf.code_action()<CR>', opts)
   vim.api.nvim_buf_set_keymap(bufnr, 'n', 'gr', '<cmd>lua vim.lsp.buf.references()<CR>', opts)
   vim.api.nvim_buf_set_keymap(bufnr, 'n', '<space>f', '<cmd>lua vim.lsp.buf.formatting()<CR>', opts)
 end
@@ -125,6 +128,37 @@ require'nvim-treesitter.configs'.setup {
     -- additional_vim_regex_highlighting = false,
   },
 }
+
+-- LSP status
+local lsp_status = require('lsp-status')
+lsp_status.register_progress()
+
+local lspconfig = require('lspconfig')
+
+-- Some arbitrary servers
+lspconfig.clangd.setup({
+  handlers = lsp_status.extensions.clangd.setup(),
+  init_options = {
+    clangdFileStatus = true
+  },
+  on_attach = lsp_status.on_attach,
+  capabilities = lsp_status.capabilities
+})
+lspconfig.ghcide.setup({
+  on_attach = lsp_status.on_attach,
+  capabilities = lsp_status.capabilities
+})
+lspconfig.rust_analyzer.setup({
+  on_attach = lsp_status.on_attach,
+  capabilities = lsp_status.capabilities
+})
+lspconfig.eslint.setup({
+})
+lspconfig.pyright.setup({
+  on_attach = lsp_status.on_attach,
+  capabilities = lsp_status.capabilities
+})
+
 
 ----------------------------- AUTO-COMPLETION  --------------------------------
 
@@ -307,6 +341,78 @@ map('n', '<leader>gg', '<cmd>Neogit<CR>', opts)
 require'nvim-tree'.setup {
 }
 
+-- BARBAR.NVIM - buffer tabs in neovim
+-- Move to previous/next
+map('n', 'gT', '<Cmd>BufferPrevious<CR>', opts)
+map('n', 'gt', '<Cmd>BufferNext<CR>', opts)
+-- Goto buffer in position...
+map('n', '<leader>w1', '<Cmd>BufferGoto 1<CR>', opts)
+map('n', '<leader>w2', '<Cmd>BufferGoto 2<CR>', opts)
+map('n', '<leader>w3', '<Cmd>BufferGoto 3<CR>', opts)
+map('n', '<leader>w4', '<Cmd>BufferGoto 4<CR>', opts)
+map('n', '<leader>w5', '<Cmd>BufferGoto 5<CR>', opts)
+map('n', '<leader>w6', '<Cmd>BufferGoto 6<CR>', opts)
+map('n', '<leader>w7', '<Cmd>BufferGoto 7<CR>', opts)
+map('n', '<leader>w8', '<Cmd>BufferGoto 8<CR>', opts)
+map('n', '<leader>w9', '<Cmd>BufferGoto 9<CR>', opts)
+map('n', '<leader>w0', '<Cmd>BufferLast<CR>', opts)
+-- Close buffer
+map('n', '<leader>wq', '<Cmd>BufferClose<CR>', opts)
+-- Set barbar's options
+require'bufferline'.setup {
+  -- Enable/disable animations
+  animation = true,
+  -- Enable/disable auto-hiding the tab bar when there is a single buffer
+  auto_hide = true,
+  -- Enable/disable current/total tabpages indicator (top right corner)
+  tabpages = true,
+  -- Enable/disable close button
+  closable = false,
+  -- Enables/disable clickable tabs
+  --  - left-click: go to buffer
+  --  - middle-click: delete buffer
+  clickable = false,
+  -- Excludes buffers from the tabline
+  -- exclude_ft = {'javascript'},
+  -- exclude_name = {'package.json'},
+  -- Enable/disable icons
+  -- if set to 'numbers', will show buffer index in the tabline
+  -- if set to 'both', will show buffer index and icons in the tabline
+  icons = both,
+  -- If set, the icon color will follow its corresponding buffer
+  -- highlight group. By default, the Buffer*Icon group is linked to the
+  -- Buffer* group (see Highlighting below). Otherwise, it will take its
+  -- default value as defined by devicons.
+  icon_custom_colors = true,
+  -- Configure icons on the bufferline.
+  icon_separator_active = '▎',
+  icon_separator_inactive = '▎',
+  icon_close_tab = '',
+  icon_close_tab_modified = '●',
+  icon_pinned = '車',
+  -- If true, new buffers will be inserted at the start/end of the list.
+  -- Default is to insert after current buffer.
+  insert_at_end = false,
+  insert_at_start = false,
+  -- Sets the maximum padding width with which to surround each tab
+  maximum_padding = 1,
+  -- Sets the maximum buffer name length.
+  maximum_length = 30,
+  -- If set, the letters for each buffer in buffer-pick mode will be
+  -- assigned based on their name. Otherwise or in case all letters are
+  -- already assigned, the behavior is to assign letters in order of
+  -- usability (see order below)
+  semantic_letters = true,
+  -- New buffer letters are assigned in this order. This order is
+  -- optimal for the qwerty keyboard layout but might need adjustement
+  -- for other layouts.
+  letters = 'asdfjkl;ghnmxcvbziowerutyqpASDFJKLGHNMXCVBZIOWERUTYQP',
+  -- Sets the name of unnamed buffers. By default format is "[Buffer X]"
+  -- where X is the buffer number. But only a static string is accepted here.
+  no_name_title = nil,
+}
+
+
 -- Nord theme setup
 vim.g.nord_contrast = true
 vim.g.nord_borders = false
@@ -314,10 +420,82 @@ vim.g.nord_disable_background = true
 vim.g.nord_italic = true
 
 -- Tokyonight theme
-vim.g.tokyonight_style = "night"
-vim.g.tokyonight_italic_comments = true
-vim.g.tokyonight_transparent = true
-vim.g.tokyonight_transparent_sidebar = true
-vim.g.tokyonight_sidebars = { "qf", "vista_kind", "terminal", "packer" }
+require("tokyonight").setup({
+  -- your configuration comes here
+  -- or leave it empty to use the default settings
+  style = "night", -- The theme comes in three styles, `storm`, `moon`, a darker variant `night` and `day`
+  transparent = true, -- Enable this to disable setting the background color
+  terminal_colors = true, -- Configure the colors used when opening a `:terminal` in Neovim
+  styles = {
+    -- Style to be applied to different syntax groups
+    -- Value is any valid attr-list value for `:help nvim_set_hl`
+    comments = { italic = true },
+    keywords = { italic = true },
+    functions = {},
+    variables = {},
+    -- Background styles. Can be "dark", "transparent" or "normal"
+    sidebars = "transparent", -- style for sidebars, see below
+    floats = "dark", -- style for floating windows
+  },
+  sidebars = { "qf", "help" }, -- Set a darker background on sidebar-like windows. For example: `["qf", "vista_kind", "terminal", "packer"]`
+  day_brightness = 0.3, -- Adjusts the brightness of the colors of the **Day** style. Number between 0 and 1, from dull to vibrant colors
+  hide_inactive_statusline = false, -- Enabling this option, will hide inactive statuslines and replace them with a thin border instead. Should work with the standard **StatusLine** and **LuaLine**.
+  dim_inactive = false, -- dims inactive windows
+  lualine_bold = false, -- When `true`, section headers in the lualine theme will be bold
+
+  --- You can override specific color groups to use other groups or a hex color
+  --- function will be called with a ColorScheme table
+  ---@param colors ColorScheme
+  on_colors = function(colors) end,
+
+  --- You can override specific highlights to use other groups or a hex color
+  --- function will be called with a Highlights and ColorScheme table
+  ---@param highlights Highlights
+  ---@param colors ColorScheme
+  on_highlights = function(highlights, colors) end,
+})
+
+-- Gitsigns - showing git changes on the number line
+require('gitsigns').setup {
+  signs = {
+    add          = {hl = 'GitSignsAdd'   , text = '│', numhl='GitSignsAddNr'   , linehl='GitSignsAddLn'},
+    change       = {hl = 'GitSignsChange', text = '│', numhl='GitSignsChangeNr', linehl='GitSignsChangeLn'},
+    delete       = {hl = 'GitSignsDelete', text = '_', numhl='GitSignsDeleteNr', linehl='GitSignsDeleteLn'},
+    topdelete    = {hl = 'GitSignsDelete', text = '‾', numhl='GitSignsDeleteNr', linehl='GitSignsDeleteLn'},
+    changedelete = {hl = 'GitSignsChange', text = '~', numhl='GitSignsChangeNr', linehl='GitSignsChangeLn'},
+  },
+  signcolumn = true,  -- Toggle with `:Gitsigns toggle_signs`
+  numhl      = false, -- Toggle with `:Gitsigns toggle_numhl`
+  linehl     = false, -- Toggle with `:Gitsigns toggle_linehl`
+  word_diff  = false, -- Toggle with `:Gitsigns toggle_word_diff`
+  watch_gitdir = {
+    interval = 1000,
+    follow_files = true
+  },
+  attach_to_untracked = true,
+  current_line_blame = false, -- Toggle with `:Gitsigns toggle_current_line_blame`
+  current_line_blame_opts = {
+    virt_text = true,
+    virt_text_pos = 'eol', -- 'eol' | 'overlay' | 'right_align'
+    delay = 1000,
+    ignore_whitespace = false,
+  },
+  current_line_blame_formatter = '<author>, <author_time:%Y-%m-%d> - <summary>',
+  sign_priority = 6,
+  update_debounce = 100,
+  status_formatter = nil, -- Use default
+  max_file_length = 40000, -- Disable if file is longer than this (in lines)
+  preview_config = {
+    -- Options passed to nvim_open_win
+    border = 'single',
+    style = 'minimal',
+    relative = 'cursor',
+    row = 0,
+    col = 1
+  },
+  yadm = {
+    enable = false
+  },
+}
 
 vim.cmd([[colorscheme tokyonight]])
