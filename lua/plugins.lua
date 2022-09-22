@@ -6,6 +6,8 @@ return require('packer').startup(function()
     use 'wbthomason/packer.nvim' -- Package manager
     use "williamboman/nvim-lsp-installer"
     use 'neovim/nvim-lspconfig' -- Collection of configurations for the built-in LSP client
+    use 'nvim-lua/lsp-status.nvim' -- status for lsp on the lualine
+    use 'kyazdani42/nvim-web-devicons'
 
     -- autocompletion
     use 'hrsh7th/cmp-nvim-lsp'
@@ -73,6 +75,17 @@ return require('packer').startup(function()
         }
     end
     }
+    -- Tabs
+    use {
+        'romgrk/barbar.nvim',
+        requires = {'kyazdani42/nvim-web-devicons'}
+    }
+    use {
+        'lewis6991/gitsigns.nvim',
+        -- tag = 'release' -- To use the latest release (do not use this if you run Neovim nightly or dev builds!)
+    }
+    -- Formatting
+    use 'sbdchd/neoformat'
     -- Telescope - fuzzy finding
     use {
         'nvim-telescope/telescope.nvim',
