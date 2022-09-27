@@ -333,8 +333,82 @@ db.SessionLoad=true
 require("telescope").load_extension "file_browser"
 
 -- Neogit: similar to Magit
-local neogit = require('neogit')
-neogit.setup {}
+local neogit = require("neogit")
+neogit.setup {
+  disable_signs = false,
+  disable_hint = false,
+  disable_context_highlighting = false,
+  disable_commit_confirmation = false,
+  -- Neogit refreshes its internal state after specific events, which can be expensive depending on the repository size. 
+  -- Disabling `auto_refresh` will make it so you have to manually refresh the status after you open it.
+  auto_refresh = true,
+  disable_builtin_notifications = false,
+  use_magit_keybindings = false,
+  -- Change the default way of opening neogit
+  kind = "tab",
+  -- Change the default way of opening the commit popup
+  commit_popup = {
+    kind = "split",
+  },
+  -- Change the default way of opening popups
+  popup = {
+    kind = "split",
+  },
+  -- customize displayed signs
+  signs = {
+    -- { CLOSED, OPENED }
+    section = { ">", "v" },
+    item = { ">", "v" },
+    hunk = { "", "" },
+  },
+  integrations = {
+    -- Neogit only provides inline diffs. If you want a more traditional way to look at diffs, you can use `sindrets/diffview.nvim`.
+    -- The diffview integration enables the diff popup, which is a wrapper around `sindrets/diffview.nvim`.
+    --
+    -- Requires you to have `sindrets/diffview.nvim` installed.
+    -- use { 
+    --   'TimUntersberger/neogit', 
+    --   requires = { 
+    --     'nvim-lua/plenary.nvim',
+    --     'sindrets/diffview.nvim' 
+    --   }
+    -- }
+    --
+    diffview = false  
+  },
+  -- Setting any section to `false` will make the section not render at all
+  sections = {
+    untracked = {
+      folded = false
+    },
+    unstaged = {
+      folded = false
+    },
+    staged = {
+      folded = false
+    },
+    stashes = {
+      folded = true
+    },
+    unpulled = {
+      folded = true
+    },
+    unmerged = {
+      folded = false
+    },
+    recent = {
+      folded = true
+    },
+  },
+  -- override/add mappings
+  mappings = {
+    -- modify status buffer mappings
+    status = {
+      -- Adds a mapping with "B" as key that does the "BranchPopup" command
+      ["B"] = "BranchPopup",
+    }
+  }
+}
 map('n', '<leader>gg', '<cmd>Neogit<CR>', opts)
 
 -- Nvim-Tree setup using defaults: add your own options
@@ -497,5 +571,51 @@ require('gitsigns').setup {
     enable = false
   },
 }
+
+map('n', '<leader>tz','<cmd>ZenMode<CR>',opts)
+require('zen-mode').setup{
+    window = {
+    backdrop = 1, -- shade the backdrop of the Zen window. Set to 1 to keep the same as Normal
+    -- height and width can be:
+    -- * an absolute number of cells when > 1
+    -- * a percentage of the width / height of the editor when <= 1
+    -- * a function that returns the width or the height
+    width = 120, -- width of the Zen window
+    height = 1, -- height of the Zen window
+    -- by default, no options are changed for the Zen window
+    -- uncomment any of the options below, or add other vim.wo options you want to apply
+    options = {
+      -- signcolumn = "no", -- disable signcolumn
+      -- number = false, -- disable number column
+      -- relativenumber = false, -- disable relative numbers
+      -- cursorline = false, -- disable cursorline
+      -- cursorcolumn = false, -- disable cursor column
+      -- foldcolumn = "0", -- disable fold column
+      -- list = false, -- disable whitespace characters
+    },
+  },
+  plugins = {
+    -- disable some global vim options (vim.o...)
+    -- comment the lines to not apply the options
+    options = {
+      enabled = true,
+      ruler = true, -- disables the ruler text in the cmd line area
+      showcmd = true, -- disables the command in the last line of the screen
+    },
+    twilight = { enabled = true }, -- enable to start Twilight when zen mode opens
+    gitsigns = { enabled = true }, -- disables git signs
+    tmux = { enabled = false }, -- disables the tmux statusline
+  },
+  -- callback where you can add custom code when the Zen window opens
+  on_open = function(win)
+  end,
+  -- callback where you can add custom code when the Zen window closes
+  on_close = function()
+  end,
+}
+
+-- For tagging web tags (html, css, JSX)
+require('nvim-ts-autotag').setup()
+
 
 vim.cmd([[colorscheme tokyonight]])
