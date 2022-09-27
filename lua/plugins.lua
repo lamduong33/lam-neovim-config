@@ -11,7 +11,7 @@ return require('packer').startup(function()
 
     -- autocompletion
     use 'hrsh7th/cmp-nvim-lsp'
-    use 'hrsh7th/cmp-buffer'
+    -- use 'hrsh7th/cmp-buffer'
     use 'hrsh7th/cmp-path'
     use 'hrsh7th/cmp-cmdline'
     use 'hrsh7th/nvim-cmp'
@@ -92,4 +92,19 @@ return require('packer').startup(function()
         requires = { {'nvim-lua/plenary.nvim'} }
     }
     use { "nvim-telescope/telescope-file-browser.nvim" }
+    -- Zen mode
+    use {
+      "folke/zen-mode.nvim",
+      config = function()
+        require("zen-mode").setup {
+          -- your configuration comes here
+          -- or leave it empty to use the default settings
+          -- refer to the configuration section below
+        }
+      end
+    }
+
+    -- Complete web brackets and such
+    use "windwp/nvim-ts-autotag"
+    -- Auto complete pairs such as brackets, parantheses, and such.
 end)
