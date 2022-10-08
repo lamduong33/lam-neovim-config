@@ -33,6 +33,12 @@ require('plugins')
 vim.opt.timeoutlen = 300
 vim.opt.updatetime = 100
 
+-------------------------NVIM KEY BINDINGS-----------------------------------
+map('n', '<leader>qq','<cmd>quitall<CR>',opts)
+map('n', '<leader>op','<cmd>NvimTreeToggle<CR>',opts)
+map('n', '<leader>cf','<cmd>Neoformat<CR>',opts)
+vim.g.vterm_map_toggleterm = "<leader>ot"
+
 ----------------------- SUGGESTED LSP CONFIG -------------------------------------
 -- Mappings.
 -- See `:help vim.diagnostic.*` for documentation on any of the below functions
@@ -41,9 +47,6 @@ map('n', '<leader>e', '<cmd>lua vim.diagnostic.open_float()<CR>', opts)
 map('n', '[d', '<cmd>lua vim.diagnostic.goto_prev()<CR>', opts)
 map('n', ']d', '<cmd>lua vim.diagnostic.goto_next()<CR>', opts)
 map('n', '<leader>qd', '<cmd>lua vim.diagnostic.setloclist()<CR>', opts)
-map('n', '<leader>qq','<cmd>quitall<CR>',opts)
-map('n', '<leader>op','<cmd>NvimTreeToggle<CR>',opts)
-map('n', '<leader>cf','<cmd>Neoformat<CR>',opts)
 
 --  se an on_attach function to only map the following keys
 -- after the language server attaches to the current buffer
@@ -343,7 +346,7 @@ neogit.setup {
   -- Disabling `auto_refresh` will make it so you have to manually refresh the status after you open it.
   auto_refresh = true,
   disable_builtin_notifications = false,
-  use_magit_keybindings = false,
+  use_magit_keybindings = true,
   -- Change the default way of opening neogit
   kind = "tab",
   -- Change the default way of opening the commit popup
@@ -617,5 +620,4 @@ require('zen-mode').setup{
 -- For tagging web tags (html, css, JSX)
 require('nvim-ts-autotag').setup()
 
-
-vim.cmd([[colorscheme tokyonight]])
+vim.cmd([[colorscheme nord]])
