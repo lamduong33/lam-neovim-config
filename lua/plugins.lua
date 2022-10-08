@@ -107,4 +107,5 @@ return require('packer').startup(function()
     -- Complete web brackets and such
     use "windwp/nvim-ts-autotag"
     -- Auto complete pairs such as brackets, parantheses, and such.
+    use "keitokuch/vterm"
 end)
