@@ -85,7 +85,8 @@ for _, lsp in pairs(servers) do
   }
 end
 
-local capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
+--local capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
+local capabilities = require('cmp_nvim_lsp').default_capabilities()
 require("nvim-lsp-installer").setup{}
 require'lspconfig'.pyright.setup{
   capabilities = capabilities
@@ -619,5 +620,7 @@ require('zen-mode').setup{
 
 -- For tagging web tags (html, css, JSX)
 require('nvim-ts-autotag').setup()
+
+vim.g.leetcode_browser = "firefox";
 
 vim.cmd([[colorscheme nord]])
