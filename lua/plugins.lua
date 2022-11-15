@@ -108,4 +108,9 @@ return require('packer').startup(function()
     use "windwp/nvim-ts-autotag"
     -- Auto complete pairs such as brackets, parantheses, and such.
     use "keitokuch/vterm"
+
+    use "vimwiki/vimwiki"
+
+    use "ianding1/leetcode.vim"
+
 end)
