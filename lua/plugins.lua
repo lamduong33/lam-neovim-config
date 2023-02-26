@@ -31,36 +31,8 @@ return require('packer').startup(function()
 
     -- Visual
     use {
-      'glepnir/dashboard-nvim',
-      event = 'VimEnter',
-      config = function()
-        require('dashboard').setup {
-          -- config
-            theme= 'doom',
-            config = {
-            center = {
-              {
-                icon = '',
-                icon_hl = 'group',
-                desc = 'description',
-                desc_hl = 'group',
-                key = 'shortcut key in dashboard buffer not keymap !!',
-                key_hl = 'group',
-                action = '',
-              },
-            },
-            footer = {},
-        }
-        }
-      end,
-      requires = {'nvim-tree/nvim-web-devicons'}
-    }
-
-    use {
       "lukas-reineke/indent-blankline.nvim", -- show the indentation level
       config = function()
-        require("indent_blankline").setup { filetype_exclude = { "dashboard" }
-        }
       end
     }
 

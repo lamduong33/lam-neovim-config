@@ -278,35 +278,6 @@ require('lualine').setup {
 
 -- Dashboard 
 local home = os.getenv('HOME')
--- local db = require('dashboard')
---db.custom_center = {
---  {icon = ' ',
---  desc = 'Reload Last Session                     ',
---  shortcut = 'SPC s l',
---  action ='SessionLoad'},
---  {icon = ' ',
---  desc = 'Recently opened files                   ',
---  action =  'Telescope oldfiles',
---  shortcut = 'SPC f r'},
---  {icon = ' ',
---  desc = 'Find  File                              ',
---  action = 'Telescope find_files find_command=rg,--hidden,--files',
---  shortcut = 'SPC f f'},
---  {icon = ' ',
---  desc = 'File Browser                            ',
---  action =  'Telescope file_browser',
---  shortcut = 'SPC .  '},
---  {icon = ' ',
---  desc = 'Find word                               ',
---  action = 'Telescope live_grep',
---  shortcut = 'SPC f w'},
---  {icon = ' ',
---  desc = 'Open NVim dotfiles                      ',
---  action = 'Telescope dotfiles path=' .. home ..'/.config/nvim',
---  shortcut = 'SPC f p'},
---}
--- db.custom_header=vim_header
--- db.SessionLoad=true
 
 map('n', '<leader>sl', '<cmd>SessionLoad<CR>', opts)
 map('n', '<leader>fr', '<cmd>Telescope oldfiles<CR>', opts)
