@@ -313,86 +313,18 @@ require("telescope").load_extension "file_browser"
 
 -- Neogit: similar to Magit
 local neogit = require("neogit")
-neogit.setup {
-  disable_signs = false,
-  disable_hint = false,
-  disable_context_highlighting = false,
-  disable_commit_confirmation = false,
-  -- Neogit refreshes its internal state after specific events, which can be expensive depending on the repository size. 
-  -- Disabling `auto_refresh` will make it so you have to manually refresh the status after you open it.
-  auto_refresh = true,
-  disable_builtin_notifications = false,
-  use_magit_keybindings = true,
-  -- Change the default way of opening neogit
-  kind = "tab",
-  -- Change the default way of opening the commit popup
-  commit_popup = {
-    kind = "split",
-  },
-  -- Change the default way of opening popups
-  popup = {
-    kind = "split",
-  },
-  -- customize displayed signs
-  signs = {
-    -- { CLOSED, OPENED }
-    section = { ">", "v" },
-    item = { ">", "v" },
-    hunk = { "", "" },
-  },
-  integrations = {
-    -- Neogit only provides inline diffs. If you want a more traditional way to look at diffs, you can use `sindrets/diffview.nvim`.
-    -- The diffview integration enables the diff popup, which is a wrapper around `sindrets/diffview.nvim`.
-    --
-    -- Requires you to have `sindrets/diffview.nvim` installed.
-    -- use { 
-    --   'TimUntersberger/neogit', 
-    --   requires = { 
-    --     'nvim-lua/plenary.nvim',
-    --     'sindrets/diffview.nvim' 
-    --   }
-    -- }
-    --
-    diffview = false  
-  },
-  -- Setting any section to `false` will make the section not render at all
-  sections = {
-    untracked = {
-      folded = false
-    },
-    unstaged = {
-      folded = false
-    },
-    staged = {
-      folded = false
-    },
-    stashes = {
-      folded = true
-    },
-    unpulled = {
-      folded = true
-    },
-    unmerged = {
-      folded = false
-    },
-    recent = {
-      folded = true
-    },
-  },
-  -- override/add mappings
-  mappings = {
-    -- modify status buffer mappings
-    status = {
-      -- Adds a mapping with "B" as key that does the "BranchPopup" command
-      ["B"] = "BranchPopup",
-    }
-  }
-}
+neogit.setup{}
 map('n', '<leader>gg', '<cmd>Neogit<CR>', opts)
 
 -- Nvim-Tree setup using defaults: add your own options
 require'nvim-tree'.setup {
 }
+
+-- Nord theme setup
+vim.g.nord_contrast = true
+vim.g.nord_borders = false
+vim.g.nord_disable_background = true
+vim.g.nord_italic = true
 
 -- BARBAR.NVIM - buffer tabs in neovim
 -- Move to previous/next
@@ -411,66 +343,6 @@ map('n', '<leader>w9', '<Cmd>BufferGoto 9<CR>', opts)
 map('n', '<leader>w0', '<Cmd>BufferLast<CR>', opts)
 -- Close buffer
 map('n', '<leader>wq', '<Cmd>BufferClose<CR>', opts)
--- Set barbar's options
-require'bufferline'.setup {
-  -- Enable/disable animations
-  animation = true,
-  -- Enable/disable auto-hiding the tab bar when there is a single buffer
-  auto_hide = true,
-  -- Enable/disable current/total tabpages indicator (top right corner)
-  tabpages = true,
-  -- Enable/disable close button
-  closable = false,
-  -- Enables/disable clickable tabs
-  --  - left-click: go to buffer
-  --  - middle-click: delete buffer
-  clickable = false,
-  -- Excludes buffers from the tabline
-  -- exclude_ft = {'javascript'},
-  -- exclude_name = {'package.json'},
-  -- Enable/disable icons
-  -- if set to 'numbers', will show buffer index in the tabline
-  -- if set to 'both', will show buffer index and icons in the tabline
-  icons = both,
-  -- If set, the icon color will follow its corresponding buffer
-  -- highlight group. By default, the Buffer*Icon group is linked to the
-  -- Buffer* group (see Highlighting below). Otherwise, it will take its
-  -- default value as defined by devicons.
-  icon_custom_colors = true,
-  -- Configure icons on the bufferline.
-  icon_separator_active = '▎',
-  icon_separator_inactive = '▎',
-  icon_close_tab = '',
-  icon_close_tab_modified = '●',
-  icon_pinned = '車',
-  -- If true, new buffers will be inserted at the start/end of the list.
-  -- Default is to insert after current buffer.
-  insert_at_end = false,
-  insert_at_start = false,
-  -- Sets the maximum padding width with which to surround each tab
-  maximum_padding = 1,
-  -- Sets the maximum buffer name length.
-  maximum_length = 30,
-  -- If set, the letters for each buffer in buffer-pick mode will be
-  -- assigned based on their name. Otherwise or in case all letters are
-  -- already assigned, the behavior is to assign letters in order of
-  -- usability (see order below)
-  semantic_letters = true,
-  -- New buffer letters are assigned in this order. This order is
-  -- optimal for the qwerty keyboard layout but might need adjustement
-  -- for other layouts.
-  letters = 'asdfjkl;ghnmxcvbziowerutyqpASDFJKLGHNMXCVBZIOWERUTYQP',
-  -- Sets the name of unnamed buffers. By default format is "[Buffer X]"
-  -- where X is the buffer number. But only a static string is accepted here.
-  no_name_title = nil,
-}
-
-
--- Nord theme setup
-vim.g.nord_contrast = true
-vim.g.nord_borders = false
-vim.g.nord_disable_background = true
-vim.g.nord_italic = true
 
 -- Tokyonight theme
 -- require("tokyonight").setup({
