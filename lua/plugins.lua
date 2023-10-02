@@ -7,7 +7,7 @@ return require('packer').startup(function()
     use "williamboman/nvim-lsp-installer"
     use 'neovim/nvim-lspconfig' -- Collection of configurations for the built-in LSP client
     use 'nvim-lua/lsp-status.nvim' -- status for lsp on the lualine
-    use 'kyazdani42/nvim-web-devicons'
+    use 'nvim-tree/nvim-web-devicons'
 
     -- autocompletion
     use 'hrsh7th/cmp-nvim-lsp'
@@ -20,7 +20,7 @@ return require('packer').startup(function()
     use 'L3MON4D3/LuaSnip'
     use 'saadparwaiz1/cmp_luasnip'
 
-    use 'liuchengxu/vim-clap'
+    -- use {'liuchengxu/vim-clap', run = ':Clap install-binary'}
     use({
         'CosmicNvim/cosmic-ui',
         requires = { 'MunifTanjim/nui.nvim', 'nvim-lua/plenary.nvim' },
@@ -74,10 +74,7 @@ return require('packer').startup(function()
     }
     use 'norcalli/nvim-colorizer.lua' -- colorizer
     -- Tabs
-    use {
-        'romgrk/barbar.nvim',
-        requires = {'kyazdani42/nvim-web-devicons'}
-    }
+    use {'romgrk/barbar.nvim', requires = 'nvim-web-devicons'}
     use {
         'lewis6991/gitsigns.nvim',
         -- tag = 'release' -- To use the latest release (do not use this if you run Neovim nightly or dev builds!)
