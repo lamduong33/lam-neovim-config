@@ -276,6 +276,9 @@ require('lualine').setup {
 }
 ----------------------------- OTHERS --------------------------------
 
+-- indent-blankline setup
+require("ibl").setup()
+
 -- Dashboard 
 local home = os.getenv('HOME')
 

@@ -30,11 +30,7 @@ return require('packer').startup(function()
     })
 
     -- Visual
-    use {
-      "lukas-reineke/indent-blankline.nvim", -- show the indentation level
-      config = function()
-      end
-    }
+    use "lukas-reineke/indent-blankline.nvim" -- show the indentation level
 
     -- use 'folke/tokyonight.nvim'
     use 'shaunsingh/nord.nvim'
